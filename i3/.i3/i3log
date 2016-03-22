@@ -1,0 +1,10 @@
+08/06/2015 05:24:57 PM - ERROR: Using Xinerama instead of RandR. This option should be avoided at all cost because it does not refresh the list of screens, so you cannot configure displays at runtime. Please check if your driver really does not support RandR and disable this option as soon as you can.
+08/06/2015 05:24:57 PM - CORE DUMPS: You are running a development version of i3, so coredumps were automatically enabled (ulimit -c unlimited).
+08/06/2015 05:24:57 PM - CORE DUMPS: Your current working directory is "/home/ariel".
+08/06/2015 05:24:57 PM - CORE DUMPS: Your core_pattern is: |/usr/lib/systemd/systemd-coredump %p %u %g %s %t %e
+08/06/2015 05:24:57 PM - i3 4.10.3-347-g586854b (2015-07-30, branch "makepkg") starting
+08/06/2015 05:24:57 PM - Parsing configfile /home/ariel/.i3/config
+08/06/2015 05:24:57 PM - deciding for version 4 due to this line: # i3 config file (v4)
+08/06/2015 05:24:57 PM - [libi3] libi3/font.c Using Pango font monospace, size 8
+08/06/2015 05:24:57 PM - [libi3] libi3/font.c X11 root window dictates 96.252632 DPI
+ERROR: Another window manager seems to be running (X error 10)

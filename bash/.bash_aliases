@@ -1,0 +1,35 @@
+alias ls='ls --group-directories-first --color=auto'
+alias rm='rm -i'
+alias ll='ls -la'
+alias grep='grep --color=auto'
+alias df="df -Tha --total"
+alias mkdir="mkdir -pv"
+alias cerbero='~/cerbero/cerbero-uninstalled'
+alias art='php artisan'
+alias update='sudo pacman -Syu'
+alias vm='vagrant up'
+alias rvm='vagrant reload --provision'
+alias nginxstart='sudo systemctl start nginx'
+alias nginxreload='sudo systemctl restart nginx'
+alias phpreload='sudo systemctl restart php-fpm'
+alias db='mysql -uroot -p'
+alias prod='ssh nicolas@54.195.250.27'
+alias ovhserver='ssh ariel@46.105.112.52'
+alias pls='sudo $(history -p !!)'
+alias httprst='sudo systemctl restart httpd'
+alias codecept='vendor/bin/codecept'
+alias df="df -Tha --total"
+alias ..="cd .."
+alias cd..="cd .."
+alias satis-update="php /home/ariel/Sites/Plugins/bin/satis build /home/ariel/Sites/Plugins/satis.json /home/ariel/Sites/Plugins/mce"
+alias shrug="echo '¯\_(ツ)_/¯'"
+alias lennyface="echo '( ͡° ͜ʖ ͡° )'"
+alias vhosts="sudo vim /etc/httpd/conf/extra/httpd-vhosts.conf"
+alias futonprod="ssh -f -L localhost:15984:127.0.0.1:5984 nicolas@54.195.250.27 -N"
+alias futonlocalserver="ssh -p 2222 -f -L localhost:25984:127.0.0.1:5984 mce@128.140.138.96 -N"
+alias bye="exit"
+alias pingg="ping -c 3 8.8.8.8"
+alias svim="vim --servername VIM"
+alias rvim="vim --remote"
+alias clipb="xclip -selection clipboard"
+alias songtime="mpc status | grep \"%)\" | awk '{ print $3  }' | awk -F/ '{ print $1  }'"

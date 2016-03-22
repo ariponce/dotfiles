@@ -1,0 +1,54 @@
+[options]
+#font = DejaVu Sans Mono 10
+font = Hack 10
+clickable_url = true
+mouse_autohide = true
+cursor_blink = system
+browser = firefox
+allow_bold = true
+scrollback_lines = 10000
+
+# "block", "underline", "ibeam"
+cursor_shape = block
+
+# Gruvbox
+[colors]
+# hard contrast: background = #1d2021
+background = #252525
+# soft contrast: background = #32302f
+foreground = #cbcbcb
+foreground_bold = #ebdbb2
+
+# dark0 + gray
+color0 = #282828
+color8 = #928374
+
+# neurtral_red + bright_red
+color1 = #BF6161
+color9 = #BF6161
+
+# neutral_green + bright_green
+color2 = #AAB163
+color10 = #AAB163
+
+# neutral_yellow + bright_yellow
+color3 = #E1BA6E
+color11 = #E1BA6E
+
+# neutral_blue + bright_blue
+color4 = #6699cc
+color12 = #6699cc
+
+# neutral_purple + bright_purple
+color5 = #A78BB0
+color13 = #A78BB0
+
+# neutral_aqua + faded_aqua
+color6 = #689d6a
+color14 = #8ec07c
+
+# light4 + light1
+color7 = #ebebeb
+color15 = #ebebeb
+
+# vim: ft=dosini cms=#%s
