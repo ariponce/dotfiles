@@ -12,16 +12,16 @@
 set $mod Mod4
 
 # workspaces
-set $WS1 1.
-set $WS2 2.
-set $WS3 3.
-set $WS4 4.
-set $WS5 5.
-set $WS6 6.
-set $WS7 7.
-set $WS8 8.
-set $WS9 9.
-set $WS10 10.
+set $WS1 1: local
+set $WS2 2: www
+set $WS3 3: code
+set $WS4 4: prod
+set $WS5 5: http
+set $WS6 6: chat
+set $WS7 7: mail
+set $WS8 8: media
+set $WS9 9: misc
+set $WS10 10: music
 
 # Disable focus follows mouse
 focus_follows_mouse no
@@ -54,10 +54,7 @@ bindsym $mod+i exec firefox
 # start chromium
 bindsym $mod+c exec chromium
 
-# start liri
-bindsym $mod+u exec ~/scripts/liri-browser
-
-# start phpstorm
+# start passmenu
 bindsym $mod+p exec passmenu
 
 # start thunar
@@ -66,20 +63,14 @@ bindsym $mod+n exec thunar
 # kill focused window
 bindsym $mod+Shift+Q kill
 
-# start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-#bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -h 35 -nb '#343537' -nf '#DEDFCD' -sb '#B5BD68' -i -dim 0.4"
-bindsym $mod+d exec --no-startup-id rofi -show run -lines 4 -eh 2 -width 1920 -padding 460 -location 0 -opacity "85" -bw 0 -bc "#202020" -bg "#202020" -fg "#FFFFFF" -hlbg "#E46248" -hlfg "#FFFFFF"
+# start rofi
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -modi -i -dmenu -lines 4 -eh 2 -width 1920 -padding 460 -location 0 -opacity "85" -bw 0 -bc "#202020" -bg "#202020" -fg "#FFFFFF" -hlbg "#E46248" -hlfg "#FFFFFF"'
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+m focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -88,10 +79,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+M move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -100,7 +91,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -132,9 +123,6 @@ bindsym XF86AudioPause exec mpc toggle
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev
 
-# focus the child container
-#bindsym $mod+d focus child
-
 # switch to workspace
 bindsym $mod+ampersand workspace $WS1
 bindsym $mod+eacute workspace $WS2
@@ -148,21 +136,20 @@ bindsym $mod+ccedilla workspace $WS9
 bindsym $mod+agrave workspace $WS10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+eacute move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+egrave move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+ccedilla move container to workspace 9
-bindsym $mod+Shift+agrave move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+eacute move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+egrave move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+ccedilla move container to workspace $WS9
+bindsym $mod+Shift+agrave move container to workspace $WS10
 
 # Assign applications to workspace
 assign [class="Firefox"] $WS2
 assign [class="Chromium"] $WS5
-assign [class="Skype"] $WS6
 assign [class="Thunderbird"] $WS7
 
 # Move the current workspace to the next output
@@ -177,38 +164,36 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+    # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym m resize grow width 10 px or 10 ppt
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym m resize grow width 10 px or 10 ppt
 
+    bindsym Shift+j resize shrink width 5 px or 5 ppt
+    bindsym Shift+k resize grow height 5 px or 5 ppt
+    bindsym Shift+l resize shrink height 5 px or 5 ppt
+    bindsym Shift+m resize grow width 5 px or 5 ppt
 
-        bindsym Shift+j resize shrink width 5 px or 5 ppt
-        bindsym Shift+k resize grow height 5 px or 5 ppt
-		bindsym Shift+l resize shrink height 5 px or 5 ppt
-        bindsym Shift+m resize grow width 5 px or 5 ppt
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 mode "system: [p]oweroff [r]eboot" {
     bindsym p exec "poweroff"
     bindsym r exec "reboot"
-
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -219,40 +204,40 @@ set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
 bindsym $mod+Shift+g mode "$mode_gaps"
 
 mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym o      mode "$mode_gaps_outer"
+    bindsym i      mode "$mode_gaps_inner"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 1
-        bindsym minus gaps inner current minus 1
-        bindsym 0     gaps inner current set 0
+    bindsym plus  gaps inner current plus 1
+    bindsym minus gaps inner current minus 1
+    bindsym 0     gaps inner current set 0
 
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
+    bindsym Shift+plus  gaps inner all plus 5
+    bindsym Shift+minus gaps inner all minus 5
+    bindsym Shift+0     gaps inner all set 0
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
+
 mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
+    bindsym plus  gaps outer current plus 5
+    bindsym minus gaps outer current minus 5
+    bindsym 0     gaps outer current set 0
 
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
+    bindsym Shift+plus  gaps outer all plus 5
+    bindsym Shift+minus gaps outer all minus 5
+    bindsym Shift+0     gaps outer all set 0
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
 bindsym $mod+Shift+x mode "system: [p]oweroff [r]eboot"
-
 
 # Gaps
 #gaps inner 15
@@ -263,7 +248,6 @@ smart_borders on
 
 #new_window pixel 0
 for_window [class="^.*"] border pixel 1
-#for_window [class="Terminator"] border pixel 1
 
 # class                 border  backgr. text    indicator
 client.focused          #928374 #928374 #ffffff #2e9ef4
@@ -276,20 +260,14 @@ client.background       #ffffff
 # Dual-monitor setup
 exec --no-startup-id xrandr --output DisplayPort-0 --auto --left-of DVI-0
 
-# Red background
-#exec --no-startup-id hsetroot -solid "#A54242"
-# Dark background
-exec --no-startup-id hsetroot -solid "#17191A"
-# Image bg
-#exec --no-startup-id feh --bg-scale /home/ariel/Pictures/Wallpapers/IrFMpUu.jpg
+# Set bg
+exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/wallpaper.JPG
 
 # Startup programs
-#exec --no-startup-id "nm-applet"
 exec --no-startup-id compton -cb --config ~/.config/compton.conf
 exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id mpd && mpdscribble
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
-#exec --no-startup-id setxkbmap -option caps:escape # Map capslock to esc
 exec --no-startup-id setxkbmap -option ctrl:nocaps # Map capslock to esc
 exec --no-startup-id xcape -e 'Control_L=Escape' # Map capslock to esc
 exec --no-startup-id unclutter # Hide mouse pointer
@@ -302,15 +280,17 @@ exec --no-startup-id xautolock -time 5 -locker '~/scripts/lock' &
 # finds out, if available)
 bar {
     height 35
-    font pango:Hack Bold 8
+    font pango:Inconsolata 11
     colors {
-        background #1f292e
+        background #2b303b
         statusline #b3b9bd
         separator #444444
-        focused_workspace #689d6a #689d6a #DEDFCD
-        inactive_workspace #454648 #454648 #DEDFCD
-        active_workspace #458588 #458588 #DEDFCD
+        focused_workspace #2b303b #2b303b #c0c5ce
+        inactive_workspace #2b303b #2b303b #6b7893
+        active_workspace #2b303b #2b303b #939cb0
+        urgent_workspace #2b303b #2b303b #BF616a
     }
+    strip_workspace_numbers yes
     position top
     status_command i3blocks
 }

@@ -20,7 +20,8 @@ set $WS5 5.
 set $WS6 6.
 set $WS7 7.
 set $WS8 8.
-set $WS9 9.
+set $WS9 9.
+set $WS10 10.
 
 # Disable focus follows mouse
 focus_follows_mouse no
@@ -44,7 +45,8 @@ font pango: DejaVu Sans Mono Book, FontAwesome 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec terminator --profile=Gruvbox
+bindsym $mod+Return exec termite
 
 # start firefox
 bindsym $mod+i exec firefox
@@ -52,14 +54,11 @@ bindsym $mod+i exec firefox
 # start chromium
 bindsym $mod+c exec chromium
 
-# start liri
-bindsym $mod+u exec ~/scripts/liri-browser
+# start passmenu
+bindsym $mod+p exec passmenu
 
-# start phpstorm
-bindsym $mod+p exec phpstorm.sh 
-
-# start nautilus
-bindsym $mod+n exec nautilus
+# start thunar
+bindsym $mod+n exec thunar
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -69,8 +68,10 @@ bindsym $mod+Shift+Q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -h 35 -nb '#343537' -nf '#DEDFCD' -sb '#B5BD68' -i -dim 0.4"
+#bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -h 35 -nb '#343537' -nf '#DEDFCD' -sb '#B5BD68' -i -dim 0.4"
+#bindsym $mod+d exec --no-startup-id rofi -modi 'drun' -show run -lines 4 -eh 2 -width 1920 -padding 460 -location 0 -opacity '85' -bw 0 -bc '#202020' -bg '#202020' -fg '#FFFFFF' -hlbg '#E46248' -hlfg '#FFFFFF'
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -lines 4 -eh 2 -width 1920 -padding 460 -location 0 -opacity "85" -bw 0 -bc "#202020" -bg "#202020" -fg "#FFFFFF" -hlbg "#E46248" -hlfg "#FFFFFF"'
+#bindsym $mod+d exec --no-startup-id rofi -modi "run,drun" -show drun -lines 4 -eh 2 -width 1920 -padding 460 -location 0 -opacity "85" -bw 0 -bc "#202020" -bg "#202020" -fg "#FFFFFF" -hlbg "#8FA388" -hlfg "#FFFFFF"
 
 # change focus
 bindsym $mod+j focus left
@@ -142,7 +143,7 @@ bindsym $mod+minus workspace $WS6
 bindsym $mod+egrave workspace $WS7
 bindsym $mod+underscore workspace $WS8
 bindsym $mod+ccedilla workspace $WS9
-bindsym $mod+agrave workspace 10
+bindsym $mod+agrave workspace $WS10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -172,8 +173,6 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym $mod+g exec ~/scripts/layout-1
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -186,6 +185,12 @@ mode "resize" {
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
         bindsym m resize grow width 10 px or 10 ppt
+
+
+        bindsym Shift+j resize shrink width 5 px or 5 ppt
+        bindsym Shift+k resize grow height 5 px or 5 ppt
+		bindsym Shift+l resize shrink height 5 px or 5 ppt
+        bindsym Shift+m resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -219,8 +224,8 @@ mode "$mode_gaps" {
 }
 
 mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
+        bindsym plus  gaps inner current plus 1
+        bindsym minus gaps inner current minus 1
         bindsym 0     gaps inner current set 0
 
         bindsym Shift+plus  gaps inner all plus 5
@@ -248,13 +253,23 @@ bindsym $mod+Shift+x mode "system: [p]oweroff [r]eboot"
 
 
 # Gaps
-gaps inner 30 
-gaps outer 0 
+#gaps inner 15
+#gaps outer 0
 
-smart_gaps on
+#smart_gaps on
 smart_borders on
 
-new_window pixel 3
+#new_window pixel 0
+for_window [class="^.*"] border pixel 1
+#for_window [class="Terminator"] border pixel 1
+
+# class                 border  backgr. text    indicator
+client.focused          #928374 #928374 #ffffff #2e9ef4
+client.focused_inactive #282828 #282828 #ffffff #484e50
+client.unfocused        #263238 #263238 #888888 #292d2e
+client.urgent           #2f343a #FB4934 #ffffff #FB4934
+client.placeholder      #000000 #0c0c0c #ffffff #000000
+client.background       #ffffff
 
 # Dual-monitor setup
 exec --no-startup-id xrandr --output DisplayPort-0 --auto --left-of DVI-0
@@ -262,37 +277,38 @@ exec --no-startup-id xrandr --output DisplayPort-0 --auto --left-of DVI-0
 # Red background
 #exec --no-startup-id hsetroot -solid "#A54242"
 # Dark background
-#exec --no-startup-id hsetroot -solid "#17191A"
+exec --no-startup-id hsetroot -solid "#17191A"
 # Image bg
-exec --no-startup-id feh --bg-scale /home/ariel/Pictures/Wallpapers/qexocp.png
+#exec --no-startup-id feh --bg-scale /home/ariel/Pictures/Wallpapers/IrFMpUu.jpg
 
 # Startup programs
 #exec --no-startup-id "nm-applet"
 exec --no-startup-id compton -cb --config ~/.config/compton.conf
 exec --no-startup-id start-pulseaudio-x11
-exec --no-startup-id mpd && mpdscribble 
+exec --no-startup-id mpd && mpdscribble
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
-exec --no-startup-id setxkbmap -option caps:escape # Map capslock to esc
-exec --no-startup-id unclutter # Hide mouse pointer 
+#exec --no-startup-id setxkbmap -option caps:escape # Map capslock to esc
+exec --no-startup-id setxkbmap -option ctrl:nocaps # Map capslock to esc
+exec --no-startup-id xcape -e 'Control_L=Escape' # Map capslock to esc
+exec --no-startup-id unclutter # Hide mouse pointer
 
 # Lock screen
-bindsym $mod+b exec "~/scripts/lock"
-exec --no-startup-id xautolock -time 5 -locker '~/scripts/lock.' &
+bindsym $mod+t exec "~/scripts/lock"
+exec --no-startup-id xautolock -time 5 -locker '~/scripts/lock' &
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
     height 35
-    font pango:Hack Bold 8 
+    font pango:Hack Bold 8
     colors {
-        #background #151718
-        background #343537
+        background #1f292e
         statusline #b3b9bd
         separator #444444
-        focused_workspace #B5BD68 #B5BD68 #DEDFCD
+        focused_workspace #689d6a #689d6a #DEDFCD
         inactive_workspace #454648 #454648 #DEDFCD
-        active_workspace #8C9440 #8C9440 #DEDFCD
-    }   
+        active_workspace #458588 #458588 #DEDFCD
+    }
     position top
     status_command i3blocks
-} 
+}

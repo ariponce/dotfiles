@@ -17,14 +17,17 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'xolox/vim-colorscheme-switcher'
 Plugin '0ax1/lxvc'
+Plugin 'chriskempson/base16-vim'
 
 " main plugins
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'wellle/targets.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'mbbill/undotree'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'vim-scripts/CSApprox'
-Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jlanzarotta/bufexplorer'
@@ -56,21 +59,26 @@ Plugin 'tobyS/vmustache'
 Plugin 'tpope/vim-obsession'
 Plugin 'dhruvasagar/vim-prosession'
 Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'Shougo/vimshell.vim'
+"Plugin 'Shougo/vimshell.vim'
 Plugin 'Shougo/vimproc'
+Plugin 'benmills/vimux'
+Plugin 'ervandew/supertab'
 
-Plugin 'KabbAmine/yowish.vim'
+Plugin 'junegunn/goyo.vim'
+"Plugin 'KabbAmine/yowish.vim'
 
 """ LANGUAGES
 Plugin 'sheerun/vim-polyglot'
 Plugin 'adoy/vim-php-refactoring-toolbox'
 Plugin 'arnaud-lb/vim-php-namespace'
+Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'tobyS/pdv'
 Plugin 'fatih/vim-go'
 Plugin 'mattn/emmet-vim'
-Plugin 'chase/vim-ansible-yaml'
+Plugin 'pearofducks/ansible-vim'
 Plugin 'janko-m/vim-test'
 Plugin 'tpope/vim-dispatch'
+Plugin 'rust-lang/rust.vim'
 
 " All Plugins must be added before the following line
 call vundle#end()            " required
@@ -83,20 +91,18 @@ filetype plugin on
 """"""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = "\<Space>"
 
-set nocompatible
 set encoding=utf-8
 set smarttab " respect tabstop, shiftwidth and softtabstop
 set tabstop=4 " tabs are 4 spaces
 set shiftwidth=4 " number of spaces to use for indent
 set softtabstop=4 " edit as if the tabs are 4 chars
-set noexpandtab " use tabs, no spaces
+set expandtab " use tabs, no spaces
 
 set autoindent " automatically indent files
 set copyindent " copy last indent when autoindenting
 
 " show the current line number and relative numbers from there
 set number
-"set relativenumber
 
 set history=1000 " save up to 1000 histories
 
@@ -123,23 +129,14 @@ set mouse=a
 set backupdir=~/.vim/backup_files//
 set directory=~/.vim/swap_files//
 set undodir=~/.vim/undo_files//
-
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
-
 set pastetoggle=<F2>
-
-" folding
-"set foldmethod=syntax " fold based on indent
-"set foldnestmax=2 " deepest fold is 10 levels
-"set foldenable " don't fold by default
-"set foldlevel=2
 
 " colors
 syntax enable
+let base16colorspace=256  " Access colors present in 256 colorspace"
 let g:hybrid_use_Xresources = 1
 set background=dark
-colorscheme yowish
-"set term=screen-256color
+colorscheme base16-ocean
 
 " Disable Background Color Erase (BCE) so that color schemes work properly
 " when Vim is used inside tmux and GNU screen.
@@ -184,8 +181,7 @@ if has('autocmd') && !exists('autocommands_loaded')
 
     " autocmd! BufEnter * call ApplyLocalSettings(expand('<afile>:p:h'))
 
-	autocmd BufRead * FixWhitespace
-	autocmd BufWritePre * FixWhitespace
+	autocmd BufWritePre * StripWhitespace
 
 	augroup reload_vimrc " {
 		autocmd!
@@ -301,6 +297,12 @@ nmap OO :pu!_<Cr>j
 
 nnoremap <Enter> :
 
+" provide hjkl movements in Insert mode via the <Alt> modifier key
+inoremap <A-h> <C-o>h
+inoremap <A-j> <C-o>j
+inoremap <A-k> <C-o>k
+inoremap <A-l> <C-o>l
+
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Git
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -317,8 +319,8 @@ set diffopt+=vertical
 
 " Netrw
 " ==============================================
-let g:netrw_liststyle=3
-nmap <F7> :Explore<Cr>
+"let g:netrw_liststyle=3
+"nmap <F7> :Explore<Cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -414,30 +416,30 @@ set laststatus=2
 "let g:airline#extensions#hunks#non_zero_only   =  1 " git gutter
 
 let g:loaded_airline_themes=1
-let g:airline_theme = 'yowish'
+let g:airline_theme = 'base16_ocean'
 set noshowmode
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
 " Automatically populate the symbols dictionary with the powerline symbols.
 let g:airline_powerline_fonts = 1
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_left_alt_sep = '⎢'
-let g:airline_right_alt_sep = '⎟'
-let g:airline_mode_map = {
-			\ '__' : '-',
-			\ 'n'  : 'N',
-			\ 'i'  : 'I',
-			\ 'R'  : 'R',
-			\ 'c'  : 'C',
-			\ 'v'  : 'V',
-			\ 'V'  : 'V-L',
-			\ '' : 'V',
-			\ 's'  : 'S',
-			\ 'S'  : 'S',
-			\ '' : 'S',
-		\ }
+"let g:airline_left_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_left_alt_sep = '⎢'
+"let g:airline_right_alt_sep = '⎟'
+"let g:airline_mode_map = {
+			"\ '__' : '-',
+			"\ 'n'  : 'N',
+			"\ 'i'  : 'I',
+			"\ 'R'  : 'R',
+			"\ 'c'  : 'C',
+			"\ 'v'  : 'V',
+			"\ 'V'  : 'V-L',
+			"\ '' : 'V',
+			"\ 's'  : 'S',
+			"\ 'S'  : 'S',
+			"\ '' : 'S',
+		"\ }
 " Enable only those extensions
 " EXTENSIONS
 let g:airline#extensions#tabline#show_buffers = 1
@@ -503,7 +505,6 @@ let g:qs_second_occurrence_highlight_color = 81
 let g:ctrlp_map = "<c-p>"
 nnoremap <leader>bp :CtrlPMRU<CR>
 nnoremap <leader>t :CtrlPBuffer<CR>
-nnoremap <leader>g :CtrlPTag<cr>
 let g:ctrlp_follow_symlinks=1
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
@@ -558,6 +559,24 @@ augroup END
 
 let g:fzf_layout = { 'down': '~60%' }
 
+function! s:buflist()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
+
+function! s:bufopen(e)
+  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+nnoremap  <Leader>bf :call fzf#run({
+\   'source':  reverse(<sid>buflist()),
+\   'sink':    function('<sid>bufopen'),
+\   'options': '+m',
+\   'down':    len(<sid>buflist()) + 2
+\ })<CR>
+
 " UltiSnips
 " =============================================
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -583,9 +602,9 @@ let g:bufExplorerFindActive=0 " fix bufexplorer bug with hidden
 
 " Neocomplete
 " =============================================
-let g:acp_enableAtStartup = 1
-let g:neocomplete#enable_at_startup = 1
-let g:SuperTabDefaultCompletionType = ""
+"let g:acp_enableAtStartup = 1
+"let g:neocomplete#enable_at_startup = 1
+"let g:SuperTabDefaultCompletionType = ""
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -593,9 +612,40 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
+" Auto pairs
+"let g:AutoPairsShortcutFastWrap = "<leader>w"
+
 " Vim-move
 " =============================================
 let g:move_key_modifier = 'C'
+
+" Rust
+"===========================================
+let g:ycm_rust_src_path = '~/sources/rust/src/'
+nnoremap <Leader>g :YcmCompleter GoTo<CR>
+
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-e>"
+" this mapping Enter key to <C-y> to chose the current highlight item
+" and close the selection list, same as other IDEs.
+" CONFLICT with some plugins like tpope/Endwise
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " PHP refactor
 " =============================================
@@ -628,8 +678,14 @@ let g:vimshell_prompt = '% '
 " Vim test
 " ============================================
 nmap <silent> <leader>tt :TestNearest<CR>
-let test#strategy = "dispatch"
+let test#strategy = "vimux"
+let test#php#phpunit#executable = '/usr/local/bin/phpunit'
 
+" Phpcomplete
+let g:phpcomplete_parse_docblock_comments = 1
+let g:phpcomplete_mappings = {
+  \ 'jump_to_def': '<C-G>',
+  \ }
 " Functions
 " ============================================
 function! AddNamespace()
@@ -644,7 +700,10 @@ function! IPhpInsertUse()
 endfunction
 "autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
 "autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
+"
 
+map <Leader>ut :VimuxRunCommand("phpunit")<CR>
+map <Leader>et :VimuxRunCommand("phpunit --stop-on-error")<CR>
 
 function! PhpSyntaxOverride()
   hi! def link phpDocTags  phpDefine
