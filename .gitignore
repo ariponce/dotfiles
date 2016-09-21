@@ -1,4 +1,6 @@
+bash/.bash_history
 mpd/.mpd/mpd.log
+mpd/.mpd/mpdstate
 mpd/.mpd/mpd.db
 mpd/.mpd/mpd.pid
 ncmpcpp/.ncmpcpp/error.log

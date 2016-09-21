@@ -22,6 +22,7 @@ set $WS7 7: mail
 set $WS8 8: media
 set $WS9 9: misc
 set $WS10 10: music
+set $WS11 11: misc2
 
 # Disable focus follows mouse
 focus_follows_mouse no
@@ -134,6 +135,7 @@ bindsym $mod+egrave workspace $WS7
 bindsym $mod+underscore workspace $WS8
 bindsym $mod+ccedilla workspace $WS9
 bindsym $mod+agrave workspace $WS10
+bindsym $mod+parenright workspace $WS11
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $WS1
@@ -261,7 +263,7 @@ client.background       #ffffff
 exec --no-startup-id xrandr --output DisplayPort-0 --auto --left-of DVI-0
 
 # Set bg
-exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/wallpaper.JPG
+exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/showmewhatyougot.png
 
 # Startup programs
 exec --no-startup-id compton -cb --config ~/.config/compton.conf
@@ -282,15 +284,16 @@ bar {
     height 35
     font pango:Inconsolata 11
     colors {
-        background #2b303b
+        background #2b303b99
         statusline #b3b9bd
         separator #444444
-        focused_workspace #2b303b #2b303b #c0c5ce
-        inactive_workspace #2b303b #2b303b #6b7893
-        active_workspace #2b303b #2b303b #939cb0
-        urgent_workspace #2b303b #2b303b #BF616a
+        focused_workspace #2b303b99 #2b303b99 #ebcb8b
+        inactive_workspace #2b303b99 #2b303b99 #8fa1b3
+        active_workspace #2b303b99 #2b303b99 #939cb0
+        urgent_workspace #2b303b99 #2b303b99 #BF616a
     }
     strip_workspace_numbers yes
     position top
-    status_command i3blocks
+    status_command i3blocks -v
+    i3bar_command i3bar -t
 }

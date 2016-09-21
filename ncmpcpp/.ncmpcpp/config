@@ -6,11 +6,12 @@ color2 = "black"
 empty_tag_color = "red"
 main_window_color = "white"
 main_window_highlight_color = "cyan"
-active_column_color = "blue"
+active_column_color = "yellow"
 active_window_border = "black"
 window_border_color = "red"
 #statusbar_color = "yellow"
 header_window_color = "yellow"
+system_encoding = "utf-8"
 
 ##### song format #####
 ##

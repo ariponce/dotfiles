@@ -170,7 +170,7 @@
 	subrepo = !sh -c 'filter-branch --prune-empty --subdirectory-filter $1 master' -
 	human = name-rev --name-only --refs=refs/heads/*
 	serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
-	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}" 
+	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
 	fuck = reset HEAD --hard
 
 [user]
@@ -183,4 +183,4 @@
 [push]
 	default = tracking
 [core]
-	filemode = false
+	fileMode = false

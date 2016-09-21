@@ -14,9 +14,9 @@ set rtp+=~/.fzf
 Plugin 'gmarik/Vundle.vim'
 
 " colorschemes
-Plugin 'flazz/vim-colorschemes'
-Plugin 'xolox/vim-colorscheme-switcher'
-Plugin '0ax1/lxvc'
+"Plugin 'flazz/vim-colorschemes'
+"Plugin 'xolox/vim-colorscheme-switcher'
+"Plugin '0ax1/lxvc'
 Plugin 'chriskempson/base16-vim'
 
 " main plugins
@@ -26,33 +26,30 @@ Plugin 'wellle/targets.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'mbbill/undotree'
 Plugin 'vim-scripts/grep.vim'
-Plugin 'vim-scripts/CSApprox'
+"Plugin 'vim-scripts/CSApprox'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jlanzarotta/bufexplorer'
-Plugin 'scrooloose/syntastic.git'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-vinegar'
+"Plugin 'tpope/vim-vinegar'
 Plugin 'henrik/vim-indexed-search'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'scrooloose/nerdtree'
 Plugin 'unblevable/quick-scope'
 Plugin 'powerline/powerline'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'majutsushi/tagbar'
+"Plugin 'majutsushi/tagbar'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'tpope/vim-repeat'
-Plugin 'Shougo/neocomplete.vim'
+"Plugin 'Shougo/neocomplete.vim'
 Plugin 'terryma/vim-expand-region'
 Plugin 'gilgigilgil/anderson.vim'
 Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-notes'
 Plugin 'godlygeek/tabular'
 Plugin 'matze/vim-move'
 Plugin 'tobyS/vmustache'
@@ -69,9 +66,9 @@ Plugin 'junegunn/goyo.vim'
 
 """ LANGUAGES
 Plugin 'sheerun/vim-polyglot'
-Plugin 'adoy/vim-php-refactoring-toolbox'
+"Plugin 'adoy/vim-php-refactoring-toolbox'
 Plugin 'arnaud-lb/vim-php-namespace'
-Plugin 'shawncplus/phpcomplete.vim'
+"Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'tobyS/pdv'
 Plugin 'fatih/vim-go'
 Plugin 'mattn/emmet-vim'
@@ -79,6 +76,7 @@ Plugin 'pearofducks/ansible-vim'
 Plugin 'janko-m/vim-test'
 Plugin 'tpope/vim-dispatch'
 Plugin 'rust-lang/rust.vim'
+Plugin 'racer-rust/vim-racer'
 
 " All Plugins must be added before the following line
 call vundle#end()            " required
@@ -330,72 +328,72 @@ set diffopt+=vertical
 " =============================================
 
 " Toggle the NERD Tree on an off with F7
-nmap <F7> :NERDTreeToggle<CR>
+"nmap <F7> :NERDTreeToggle<CR>
 
-" Close the NERD Tree with Shift-F7
-nmap <S-F7> :NERDTreeClose<CR>
+"" Close the NERD Tree with Shift-F7
+"nmap <S-F7> :NERDTreeClose<CR>
 
-" Close NERDTree after a file is opened
-let g:NERDTreeQuitOnOpen=0
+"" Close NERDTree after a file is opened
+"let g:NERDTreeQuitOnOpen=0
 
-" Show hidden files in NERDTree
-let NERDTreeShowHidden=1
+"" Show hidden files in NERDTree
+"let NERDTreeShowHidden=1
 
-" Show the bookmarks table on startup
-let NERDTreeShowBookmarks=1
+"" Show the bookmarks table on startup
+"let NERDTreeShowBookmarks=1
 
-" Don't display these kinds of files
-let NERDTreeIgnore=[ '\.ncb$', '\.suo$', '\.vcproj\.RIMNET', '\.obj$',
-                   \ '\.ilk$', '^BuildLog.htm$', '\.pdb$', '\.idb$',
-                   \ '\.embed\.manifest$', '\.embed\.manifest.res$',
-                   \ '\.intermediate\.manifest$', '^mt.dep$', '^.git$', '^.idea$' ]
+"" Don't display these kinds of files
+"let NERDTreeIgnore=[ '\.ncb$', '\.suo$', '\.vcproj\.RIMNET', '\.obj$',
+                   "\ '\.ilk$', '^BuildLog.htm$', '\.pdb$', '\.idb$',
+                   "\ '\.embed\.manifest$', '\.embed\.manifest.res$',
+                   "\ '\.intermediate\.manifest$', '^mt.dep$', '^.git$', '^.idea$' ]
 
 
-let g:SuperTabDefaultCompletionType = ""
+"let g:SuperTabDefaultCompletionType = ""
 
-""" auto-open NerdTree when no file is specified
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"""" auto-open NerdTree when no file is specified
+""autocmd StdinReadPre * let s:std_in=1
+""autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" NerdTree git
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ "Unknown"   : "?"
-    \
-    \}
+"" NerdTree git
+"let g:NERDTreeIndicatorMapCustom = {
+    "\ "Modified"  : "✹",
+    "\ "Staged"    : "✚",
+    "\ "Untracked" : "✭",
+    "\ "Renamed"   : "➜",
+    "\ "Unmerged"  : "═",
+    "\ "Deleted"   : "✖",
+    "\ "Dirty"     : "✗",
+    "\ "Clean"     : "✔︎",
+    "\ "Unknown"   : "?"
+    "\
+    "\}
 
 
 " NERDTress File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
+"function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+"exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+"exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+"endfunction
 
-call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
-call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
-call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
-call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
-call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
+"call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+"call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+"call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+"call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+"call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+"call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
+"call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
+"call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
+"call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
+"call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
 
 " Airline
 " =============================================
@@ -458,12 +456,12 @@ let g:airline#extensions#tabline#show_splits = 0
 " Syntastic
 " =============================================
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
 
 " QuickScope
 " =============================================
@@ -622,6 +620,8 @@ let g:move_key_modifier = 'C'
 " Rust
 "===========================================
 let g:ycm_rust_src_path = '~/sources/rust/src/'
+let g:racer_cmd = "/usr/bin/racer"
+let $RUST_SRC_PATH="/home/ariel/sources/rust/src/"
 nnoremap <Leader>g :YcmCompleter GoTo<CR>
 
 function! g:UltiSnips_Complete()
@@ -670,10 +670,10 @@ nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 " Vim shell
 " ===========================================
-nnoremap <leader>sh :VimShellPop<Cr>
-let g:vimshell_popup_command = 'belowright sp'
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-let g:vimshell_prompt = '% '
+"nnoremap <leader>sh :VimShellPop<Cr>
+"let g:vimshell_popup_command = 'belowright sp'
+"let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+"let g:vimshell_prompt = '% '
 
 " Vim test
 " ============================================
@@ -682,10 +682,10 @@ let test#strategy = "vimux"
 let test#php#phpunit#executable = '/usr/local/bin/phpunit'
 
 " Phpcomplete
-let g:phpcomplete_parse_docblock_comments = 1
-let g:phpcomplete_mappings = {
-  \ 'jump_to_def': '<C-G>',
-  \ }
+"let g:phpcomplete_parse_docblock_comments = 1
+"let g:phpcomplete_mappings = {
+  "\ 'jump_to_def': '<C-G>',
+  "\ }
 " Functions
 " ============================================
 function! AddNamespace()
@@ -703,7 +703,8 @@ endfunction
 "
 
 map <Leader>ut :VimuxRunCommand("phpunit")<CR>
-map <Leader>et :VimuxRunCommand("phpunit --stop-on-error")<CR>
+map <Leader>et :VimuxRunCommand("phpunit --stop-on-failure")<CR>
+map <Leader>cr :VimuxRunCommand("clear && cargo run")<CR>
 
 function! PhpSyntaxOverride()
   hi! def link phpDocTags  phpDefine
@@ -719,3 +720,8 @@ augroup END
 "===========================================
 let $MCE = 'plugins/mce/'
 let $MUSER = 'plugins/mce/user'
+
+
+let g:ycm_filetype_specific_completion_to_disable = {
+            \ 'php': 1
+            \}
