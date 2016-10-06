@@ -276,24 +276,26 @@ exec --no-startup-id unclutter # Hide mouse pointer
 
 # Lock screen
 bindsym $mod+t exec "~/scripts/lock"
+bindsym $mod+w exec "~/bin/lastfm-mpd-cli.py love --lastfmusername=im-designer --lastfmpassword=62a66b3b35886e2add4ab0068b3415cb && notify-send \"You loved `mpc current`\""
 exec --no-startup-id xautolock -time 5 -locker '~/scripts/lock' &
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
     height 35
+    tray_padding 5
     font pango:Inconsolata 11
     colors {
-        background #2b303b99
+        background #323845
         statusline #b3b9bd
         separator #444444
-        focused_workspace #2b303b99 #2b303b99 #ebcb8b
-        inactive_workspace #2b303b99 #2b303b99 #8fa1b3
-        active_workspace #2b303b99 #2b303b99 #939cb0
-        urgent_workspace #2b303b99 #2b303b99 #BF616a
+        focused_workspace #323845 #323845 #ebcb8b
+        inactive_workspace #323845 #323845 #8fa1b3
+        active_workspace #323845 #323845 #939cb0
+        urgent_workspace #323845 #323845 #BF616a
     }
     strip_workspace_numbers yes
-    position top
+    #position top
     status_command i3blocks -v
     i3bar_command i3bar -t
 }
