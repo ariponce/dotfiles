@@ -14,7 +14,7 @@ set $mod Mod4
 # workspaces
 set $WS1 1: local
 set $WS2 2: www
-set $WS3 3: code
+set $WS3 3: cod
 set $WS4 4: prod
 set $WS5 5: http
 set $WS6 6: chat
@@ -23,6 +23,7 @@ set $WS8 8: media
 set $WS9 9: misc
 set $WS10 10: music
 set $WS11 11: misc2
+set $WS12 12: misc3
 
 # Disable focus follows mouse
 focus_follows_mouse no
@@ -58,8 +59,8 @@ bindsym $mod+c exec chromium
 # start passmenu
 bindsym $mod+p exec passmenu
 
-# start thunar
-bindsym $mod+n exec thunar
+# start file manager
+bindsym $mod+n exec pcmanfm
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -115,14 +116,14 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+q focus parent
 
 # volume
-bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume 1 +5%
-bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume 1 -5%
-bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle
+bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume 0 -5%
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 
 # music
-bindsym XF86AudioPause exec mpc toggle
-bindsym XF86AudioNext exec mpc next
-bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioPause exec ~/scripts/toggle-music
+bindsym XF86AudioNext exec ~/scripts/next-song
+bindsym XF86AudioPrev exec ~/scripts/prev-song
 
 # switch to workspace
 bindsym $mod+ampersand workspace $WS1
@@ -136,6 +137,7 @@ bindsym $mod+underscore workspace $WS8
 bindsym $mod+ccedilla workspace $WS9
 bindsym $mod+agrave workspace $WS10
 bindsym $mod+parenright workspace $WS11
+bindsym $mod+equal workspace $WS12
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $WS1
@@ -151,7 +153,7 @@ bindsym $mod+Shift+agrave move container to workspace $WS10
 
 # Assign applications to workspace
 assign [class="Firefox"] $WS2
-assign [class="Chromium"] $WS5
+#assign [class="Chromium"] $WS5
 assign [class="Thunderbird"] $WS7
 
 # Move the current workspace to the next output
@@ -213,9 +215,10 @@ mode "$mode_gaps" {
 }
 
 mode "$mode_gaps_inner" {
-    bindsym plus  gaps inner current plus 1
-    bindsym minus gaps inner current minus 1
+    bindsym plus  gaps inner current plus 5
+    bindsym minus gaps inner current minus 5
     bindsym 0     gaps inner current set 0
+    bindsym d     gaps inner current set 20
 
     bindsym Shift+plus  gaps inner all plus 5
     bindsym Shift+minus gaps inner all minus 5
@@ -239,7 +242,10 @@ mode "$mode_gaps_outer" {
 }
 
 bindsym $mod+r mode "resize"
-bindsym $mod+Shift+x mode "system: [p]oweroff [r]eboot"
+bindsym $mod+Shift+x exec ~/scripts/rofi-power
+
+bindsym $mod+Shift+p exec ~/scripts/i3_switch_workspace.sh
+bindsym $mod+Shift+s exec teiler
 
 # Gaps
 #gaps inner 15
@@ -249,10 +255,10 @@ bindsym $mod+Shift+x mode "system: [p]oweroff [r]eboot"
 smart_borders on
 
 #new_window pixel 0
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 2
 
 # class                 border  backgr. text    indicator
-client.focused          #928374 #928374 #ffffff #2e9ef4
+client.focused          #ebcb8b #668574 #ffffff #2e9ef4
 client.focused_inactive #282828 #282828 #ffffff #484e50
 client.unfocused        #263238 #263238 #888888 #292d2e
 client.urgent           #2f343a #FB4934 #ffffff #FB4934
@@ -263,39 +269,42 @@ client.background       #ffffff
 exec --no-startup-id xrandr --output DisplayPort-0 --auto --left-of DVI-0
 
 # Set bg
-exec --no-startup-id feh --bg-scale ~/Pictures/Wallpapers/showmewhatyougot.png
+exec --no-startup-id ~/scripts/wallpaper
 
 # Startup programs
-exec --no-startup-id compton -cb --config ~/.config/compton.conf
+#exec --no-startup-id compton -cb --config ~/.config/compton.conf
 exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id mpd && mpdscribble
+exec --no-startup-id mopidy
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
 exec --no-startup-id setxkbmap -option ctrl:nocaps # Map capslock to esc
 exec --no-startup-id xcape -e 'Control_L=Escape' # Map capslock to esc
 exec --no-startup-id unclutter # Hide mouse pointer
+exec --no-startup-id numlockx # Hide mouse pointer
 
 # Lock screen
 bindsym $mod+t exec "~/scripts/lock"
-bindsym $mod+w exec "~/bin/lastfm-mpd-cli.py love --lastfmusername=im-designer --lastfmpassword=62a66b3b35886e2add4ab0068b3415cb && notify-send \"You loved `mpc current`\""
 exec --no-startup-id xautolock -time 5 -locker '~/scripts/lock' &
+bindsym $mod+w exec ~/scripts/love_track.sh
+exec_always --no-startup-id $HOME/scripts/launchbar.sh
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-    height 35
-    tray_padding 5
-    font pango:Inconsolata 11
-    colors {
-        background #323845
-        statusline #b3b9bd
-        separator #444444
-        focused_workspace #323845 #323845 #ebcb8b
-        inactive_workspace #323845 #323845 #8fa1b3
-        active_workspace #323845 #323845 #939cb0
-        urgent_workspace #323845 #323845 #BF616a
-    }
-    strip_workspace_numbers yes
-    #position top
-    status_command i3blocks -v
-    i3bar_command i3bar -t
-}
+#bar {
+    #height 35
+    #tray_padding 5
+    #font pango:Inconsolata 11
+    #colors {
+        #background #323845
+        #statusline #b3b9bd
+        #separator #444444
+        #focused_workspace #323845 #323845 #ebcb8b
+        #inactive_workspace #323845 #323845 #8fa1b3
+        #active_workspace #323845 #323845 #939cb0
+        #urgent_workspace #323845 #323845 #BF616a
+    #}
+    #strip_workspace_numbers yes
+    ##position top
+    #status_command i3blocks -v
+    #i3bar_command i3bar -t
+#}
