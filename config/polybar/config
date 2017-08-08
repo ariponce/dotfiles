@@ -1,0 +1,172 @@
+;=====================================================
+;
+;   To learn more about how to configure Lemonbuddy
+;   go to https://github.com/jaagr/lemonbuddy
+;
+;   The README contains alot of information
+;
+;=====================================================
+
+[bar/bar1]
+monitor = DisplayPort-0
+width = 100%
+height = 30
+bottom = true
+override-redirect = false
+
+background = #323845
+foreground = #b3b9bd
+underline-size = 2
+underline-color = #666
+
+separator = •
+
+border-bottom-size = 2
+border-bottom-color = #242831
+
+spacing = 2
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = Inconsolata:size=11;3
+font-1 = FontAwesome:size=10;4
+font-2 = BaekmukDotum:size=11;3
+
+modules-left = i3
+modules-center = music
+modules-right = volume cpu memory date
+
+tray-position = right
+
+[bar/bar2]
+monitor = DVI-0
+override-redirect = false
+width = 100%
+height = 30
+bottom = true
+
+
+background = #323845
+foreground = #b3b9bd
+linecolor = #666
+underline-size = 2
+underline-color = #666
+
+separator = •
+
+border-top-size = 1
+border-top-color = #242831
+border-bottom-size = 1
+border-bottom-color = #242831
+
+spacing = 0
+lineheight = 2
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = Inconsolata:size=11;3
+font-1 = FontAwesome:size=10;4
+font-2 = BaekmukDotum:size=11;3
+
+modules-left = i3
+modules-center = music
+modules-right = volume cpu memory date
+
+tray-position = right
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+strip-wsnumbers = true
+pin-workspaces = true
+label-mode = %mode%
+label-mode-padding = 2
+
+label-focused = %index%
+label-focused-foreground = #ebcb8b
+label-focused-underline = #ebcb8b
+label-focused-padding = 1
+
+label-unfocused = %index%
+label-unfocused-padding = 1
+label-unfocused-foreground = #939cb0
+
+label-urgent = %index%!
+label-urgent-background = #bf616a
+label-urgent-padding = 1
+
+label-visible = %index%
+label-visible-foreground = #939cb0
+label-visible-underline = #ebcb8b
+label-visible-padding = 1
+
+[module/memory]
+type = internal/memory
+format = <label>
+label = MEM %gb_used%/%gb_total% (%percentage_used%%)
+format-underline = #268bd2
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3
+
+[module/cpu]
+type = custom/script
+exec = ~/scripts/loadaverage.sh
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 5
+format =  <label>
+format-underline = #2aa198
+
+[module/mpd]
+type = internal/mpd
+
+host = 127.0.0.1
+port = 6600
+
+; Seconds to sleep between progressbar/song timer sync
+; Default: 1
+interval = 2
+
+label-song = " %artist% - %title%"
+
+format-online-foreground = #bf616a
+format-online-border-bottom = 3
+format-online-border-bottom-color = #bf616a
+format-online-underline = #bf616a
+
+[module/volume]
+type = custom/script
+exec =  ~/scripts/volume
+interval = 1
+scroll-up = pactl -- set-sink-volume 1 +5%
+scroll-down = pactl -- set-sink-volume 1 -5%
+format-underline = #bf616a
+format-underline-size = 5
+
+[module/date]
+type = custom/script
+exec = ~/scripts/date
+format = %{F#ebcb8b}  %{F#b3b9bd}<label>
+click-left = gsimplecal
+format-underline = #ebcb8b
+
+[module/music]
+type = custom/script
+exec = ~/scripts/nowplaying
+format =   <label>
+format-underline = #ba555f
+format-foreground = #bf616a
+
+; vim:ft=dosini
