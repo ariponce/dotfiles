@@ -14,13 +14,12 @@ set rtp+=~/.fzf
 Plugin 'gmarik/Vundle.vim'
 
 " colorschemes
-"Plugin 'flazz/vim-colorschemes'
 "Plugin 'xolox/vim-colorscheme-switcher'
+"Plugin 'flazz/vim-colorschemes'
 "Plugin '0ax1/lxvc'
 Plugin 'chriskempson/base16-vim'
 
 " main plugins
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'wellle/targets.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
@@ -57,12 +56,13 @@ Plugin 'tpope/vim-obsession'
 Plugin 'dhruvasagar/vim-prosession'
 Plugin 'tacahiroy/ctrlp-funky'
 "Plugin 'Shougo/vimshell.vim'
-Plugin 'Shougo/vimproc'
-Plugin 'benmills/vimux'
+"Plugin 'Shougo/vimproc'
+"Plugin 'benmills/vimux'
 Plugin 'ervandew/supertab'
 
 Plugin 'junegunn/goyo.vim'
 "Plugin 'KabbAmine/yowish.vim'
+Plugin 'vim-scripts/BufOnly.vim'
 
 """ LANGUAGES
 Plugin 'sheerun/vim-polyglot'
@@ -73,10 +73,15 @@ Plugin 'tobyS/pdv'
 Plugin 'fatih/vim-go'
 Plugin 'mattn/emmet-vim'
 Plugin 'pearofducks/ansible-vim'
-Plugin 'janko-m/vim-test'
-Plugin 'tpope/vim-dispatch'
+"Plugin 'janko-m/vim-test'
+"Plugin 'tpope/vim-dispatch'
 Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer'
+"Plugin 'joonty/vdebug'
+Plugin 'hashivim/vim-terraform'
+"Plugin 'MicahElliott/Rocannon'
+
+"Plugin 'munshkr/vim-tidal'
 
 " All Plugins must be added before the following line
 call vundle#end()            " required
@@ -120,7 +125,6 @@ set showmatch " show matching braces
 set mat=2 " how many tenths of a second to blink
 set magic " magic for regex
 set ttyfast " faster redrawing
-set cursorline
 set mouse=a
 
 " Save swp, backups and undos to custom folders
@@ -280,7 +284,7 @@ nnoremap <leader>vr :so ~/.vimrc<CR>
 nnoremap <leader>c :nohl<CR>
 
 " Open Undotree
-nnoremap <F5> :UndotreeToggle<CR>
+nnoremap <F4> :UndotreeToggle<CR>
 
 " Open Tagbar
 nmap <F6> :TagbarToggle<CR>
@@ -575,12 +579,7 @@ nnoremap  <Leader>bf :call fzf#run({
 \   'down':    len(<sid>buflist()) + 2
 \ })<CR>
 
-" UltiSnips
-" =============================================
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
+
 
 " EasyAlign
 " =============================================
@@ -622,7 +621,7 @@ let g:move_key_modifier = 'C'
 let g:ycm_rust_src_path = '~/sources/rust/src/'
 let g:racer_cmd = "/usr/bin/racer"
 let $RUST_SRC_PATH="/home/ariel/sources/rust/src/"
-nnoremap <Leader>g :YcmCompleter GoTo<CR>
+"nnoremap <Leader>g :YcmCompleter GoTo<CR>
 
 function! g:UltiSnips_Complete()
     call UltiSnips#ExpandSnippet()
@@ -647,6 +646,12 @@ let g:UltiSnipsListSnippets="<c-e>"
 " CONFLICT with some plugins like tpope/Endwise
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
+" UltiSnips
+" =============================================
+"let g:UltiSnipsExpandTrigger="<c-m>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
 " PHP refactor
 " =============================================
 let g:vim_php_refactoring_default_property_visibility = 'protected'
